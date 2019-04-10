@@ -8,7 +8,7 @@ resource "azurerm_sql_database" "db" {
   server_name                      = "${var.server_name}"
   create_mode                      = "${var.create_mode}"
   requested_service_objective_name = "${var.service_objective_name}"
-  
+
   tags = {
     InfrastructureAsCode = "True"
   }
