@@ -3,27 +3,22 @@ output "database_name" {
   value       = "${azurerm_sql_database.db.name}"
 }
 
-output "sql_server_name" {
-  description = "Server name of the Azure SQL Database created."
-  value       = "${azurerm_sql_server.server.name}"
+output "id" {
+  description = "The SQL Database ID."
+  value       = "${azurerm_sql_database.db.id}"
 }
 
-output "sql_server_location" {
-  description = "Location of the Azure SQL Database created."
-  value       = "${azurerm_sql_server.server.location}"
+output "creation_date" {
+  description = "The creation date of the SQL Database."
+  value       = "${azurerm_sql_database.db.creation_date}"
 }
 
-output "sql_server_version" {
-  description = "Version the Azure SQL Database created."
-  value       = "${azurerm_sql_server.server.version}"
-}
-
-output "sql_server_fqdn" {
-  description = "Fully Qualified Domain Name (FQDN) of the Azure SQL Database created."
-  value       = "${azurerm_sql_server.server.fully_qualified_domain_name}"
+output "default_secondary_location" {
+  description = "The default secondary location of the SQL Database."
+  value       = "${azurerm_sql_database.db.default_secondary_location}"
 }
 
 output "connection_string" {
-  description = "Connection string for the Azure SQL Database created."
-  value       = "Server=tcp:${azurerm_sql_server.server.fully_qualified_domain_name},1433;Initial Catalog=${azurerm_sql_database.db.name};Persist Security Info=False;User ID=${azurerm_sql_server.server.administrator_login};Password=${azurerm_sql_server.server.administrator_login_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+  description = "Connection string for the Azure SQL Database created. Demands a managed service identity (MSI) on the resource caling the database, so username/password are not required."
+  value       = "Server=tcp:${var.server_name}.database.windows.net,1433;Database=${azurerm_sql_database.db.name};"
 }
