@@ -62,5 +62,5 @@ locals {
 
 # This module provides a data map output to lookup naming standard references
 module "naming" {
-  source = "git::ssh://git@github.com/clearesult/cr-azurerm-naming.git?ref=v1.0"
+  source = "git::https://github.com/clearesult/cr-azurerm-naming.git?ref=v1.0.1"
 }
