@@ -18,7 +18,9 @@ output "default_secondary_location" {
   value       = ["${azurerm_sql_database.db.*.default_secondary_location}"]
 }
 
+/*
 output "connection_string" {
   description = "Connection string for the Azure SQL Database created. Demands a managed service identity (MSI) on the resource caling the database, so username/password are not required."
   value       = "Server=tcp:${var.server_name}.database.windows.net,1433;Database=[${azurerm_sql_database.db.*.name}];"
 }
+*/
