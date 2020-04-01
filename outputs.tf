@@ -22,6 +22,6 @@ output "connection_string" {
   description = <<EOF
 Connection string for the Azure SQL Database created. Demands a managed service identity (MSI) on the resource caling the database, so username/password are not required.
 EOF
-  value       = format("%s%s", local.cs_prefix, azurerm_sql_database.db[0].name)
+  value       = format("%s%s", local.cs_prefix, azurerm_sql_database.db.*.name[0])
 }
 

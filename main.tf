@@ -1,5 +1,5 @@
 resource "azurerm_sql_database" "db" {
-  name                             = format("%s%03d", local.name, count.index + 1)
+  name                             = local.names.override != "" ? local.names.override : format("%s%03d%s", local.names.db, count.index + 1, local.names.suffix)
   count                            = var.num
   resource_group_name              = var.rg_name
   location                         = var.location
@@ -18,3 +18,16 @@ resource "azurerm_sql_database" "db" {
   }
 }
 
+resource "azuread_group" "read_group" {
+  name = format("g%s%s%s_NA_Read", local.default_rgid, local.env_id, local.type)
+}
+
+resource "azuread_group" "rwx_group" {
+  name = format("g%s%s%s_NA_ReadWriteExec", local.default_rgid, local.env_id, local.type)
+}
+
+resource "azuread_group" "owner_group" {
+  name = format("g%s%s%s_NA_Owner", local.default_rgid, local.env_id, local.type)
+}
+
+data "azurerm_subscription" "primary" {}
