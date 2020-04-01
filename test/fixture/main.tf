@@ -26,5 +26,16 @@ module "sql-database" {
   rg_name     = basename(azurerm_resource_group.rg.id)
   location    = var.location
   server_name = basename(module.sql-server.sql_server_id[0])
+  name_prefix = format("test%s", var.rgid)
+  name_suffix = "testdb"
+}
+
+module "sql-database2" {
+  source        = "../../"
+  rgid          = var.rgid
+  rg_name       = basename(azurerm_resource_group.rg.id)
+  location      = var.location
+  server_name   = basename(module.sql-server.sql_server_id[0])
+  name_override = format("override%s", random_id.name.hex)
 }
 
